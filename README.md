@@ -20,19 +20,19 @@ class BoxShadowPainter extends CustomPainter {
     /// Step 1: Draw ticket bg
     Path path = Path();
 
-    double cardWidth = size.width;
-    double cardHeight = cardWidth * 0.4;
+    double cardWidth = size.width;  // card width
+    double cardHeight = cardWidth * 0.4;  // card height is card width * 0.4  i.e. horizontal rectangle of ratio 5/2
 
     double cardLeft = 0;
     double cardTop = 0;
     double cardRight = cardWidth;
     double cardBottom = cardHeight;
 
-    double cardHoleOffsetLeft = cardWidth * 0.75;
-    double cardBarcodeOffsetLeft = cardWidth * 0.875;
-    double cardHoleRadius = cardWidth * 0.025;
+    double cardHoleOffsetLeft = cardWidth * 0.75;   // the 2 card holes have the same offset left
+    double cardBarcodeOffsetLeft = cardWidth * 0.875;  // the barcode drawings have another offset left
+    double cardHoleRadius = cardWidth * 0.025;   //  card hole radius is responsive to card size 
 
-    double roundnessFactorLB = cardWidth * 0.05;
+    double roundnessFactorLB = cardWidth * 0.05;  // radius are responsive to card size & individually configurable
     double roundnessFactorRB = cardWidth * 0.05;
     double roundnessFactorRT = cardWidth * 0.05;
     double roundnessFactorLT = cardWidth * 0.05;
