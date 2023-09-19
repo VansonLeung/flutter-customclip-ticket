@@ -16,10 +16,7 @@ class BoxShadowPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
 
 
-
-    /// Step 1: Draw ticket bg
-    Path path = Path();
-
+    /// Step 0: Preparation
     double cardWidth = size.width;  // card width
     double cardHeight = cardWidth * 0.4;  // card height is card width * 0.4  i.e. horizontal rectangle of ratio 5/2
 
@@ -37,8 +34,15 @@ class BoxShadowPainter extends CustomPainter {
     double roundnessFactorRT = cardWidth * 0.05;
     double roundnessFactorLT = cardWidth * 0.05;
 
+    double cardLineStrokeWidth = 2;
+    double cardLineDashLength = cardWidth * 0.01;
+    double cardLineDashSkip = cardWidth * 0.01;
+
+    double cardBarCodeStrokeWidth = cardWidth * 0.1;
 
 
+    /// Step 1: Draw ticket bg
+    Path path = Path();
 
     path.moveTo(cardLeft, cardTop + roundnessFactorLT);
 
@@ -85,12 +89,12 @@ class BoxShadowPainter extends CustomPainter {
 
     /// Step 2: Draw stroke
     Paint linePaint = Paint();
-    linePaint.strokeWidth = 2;
+    linePaint.strokeWidth = cardLineStrokeWidth;
     linePaint.color = const Color.fromARGB(255, 120, 120, 120);
 
     double dynamicY = cardTop + cardHoleRadius * 1.2;
-    double dashHeight = cardWidth * 0.01;
-    double dashSpace = cardWidth * 0.01;
+    double dashHeight = cardLineDashLength;
+    double dashSpace = cardLineDashSkip;
     while (dynamicY < cardBottom - cardHoleRadius - dashHeight )
     {
       canvas.drawLine(
@@ -108,7 +112,7 @@ class BoxShadowPainter extends CustomPainter {
     /// Step 3: Draw barcode
     Random rand = Random();
     Paint linePaint2 = Paint();
-    linePaint.strokeWidth = cardWidth * 0.1;
+    linePaint.strokeWidth = cardBarCodeStrokeWidth;
     linePaint.color = const Color.fromARGB(255, 0, 0, 0);
 
     dynamicY = cardTop + cardHeight * 0.2;
