@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_customclipper/src/pages/card/CCCardClipper.dart';
 
@@ -19,6 +21,7 @@ class BoxShadowPainter extends CustomPainter {
     double cardBottom = cardHeight;
 
     double cardHoleOffsetLeft = cardWidth * 0.75;
+    double cardBarcodeOffsetLeft = cardWidth * 0.875;
     double cardHoleRadius = cardWidth * 0.025;
 
     double roundnessFactorLB = cardWidth * 0.05;
@@ -85,6 +88,29 @@ class BoxShadowPainter extends CustomPainter {
       canvas.drawLine(
           Offset(cardHoleOffsetLeft, dynamicY + dashHeight ),
           Offset(cardHoleOffsetLeft, dynamicY + dashHeight + dashSpace ),
+          linePaint
+      );
+
+      dynamicY += dashHeight + dashSpace;
+    }
+
+
+
+
+    /// Step 3: Draw barcode
+    Random rand = Random();
+    Paint linePaint2 = Paint();
+    linePaint.strokeWidth = cardWidth * 0.1;
+    linePaint.color = const Color.fromARGB(255, 0, 0, 0);
+
+    dynamicY = cardTop + cardHeight * 0.2;
+    while (dynamicY < cardBottom - cardHeight * 0.2 )
+    {
+      var dashHeight = cardWidth * 0.0055 * rand.nextDouble();
+      var dashSpace = cardWidth * 0.0055 * rand.nextDouble();
+      canvas.drawLine(
+          Offset(cardBarcodeOffsetLeft, dynamicY + dashHeight ),
+          Offset(cardBarcodeOffsetLeft, dynamicY + dashHeight + dashSpace ),
           linePaint
       );
 
